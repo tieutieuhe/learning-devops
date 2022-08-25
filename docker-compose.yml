@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+    php:
+        build:
+            context: .
+            target: php
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - 8000:8000
+        depends_on:
+            - database
+
+    # Database
+    database:
+        image: mysql:8.0
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_DATABASE=database
+            - MYSQL_USER=username
+            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_PASSWORD=password
+        volumes:
+            - db-data:/var/lib/mysql
+volumes:
+    db-data: ~
