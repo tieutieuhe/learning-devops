@@ -8,16 +8,13 @@ services:
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html
+            - vendor:/var/www/html/vendor
         ports:
             - 8000:8000
-        depends_on:
-            - database
 
     # Database
     database:
         image: mysql:8.0
-        ports:
-            - 3306:3306
         environment:
             - MYSQL_DATABASE=database
             - MYSQL_USER=username
@@ -27,3 +24,4 @@ services:
             - db-data:/var/lib/mysql
 volumes:
     db-data: ~
+    vendor: ~

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+./docker/wait-for-it.sh http://127.0.0.1:3306 -- echo "Database is up"
+
 if [ ! -f "vendor/autoload.php" ]; then
 	composer install --no-progress --no-interaction
 fi
@@ -10,7 +12,6 @@ if [ ! -f ".env" ]; then
 else
 	echo "env is exists."
 fi
-./docker/wait-for-it.sh http://localhost:3306
 php artisan migrate:install
 php artisan key:generate
 php artisan cache:clear
