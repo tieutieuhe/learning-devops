@@ -6,9 +6,10 @@ services:
             context: .
             target: php
         working_dir: /var/www/html
+        command: ./docker/entrypoint.sh
         volumes:
             - ./:/var/www/html
-            - vendor:/var/www/html/vendor
+            - ./vendor:/var/www/html/vendor
         ports:
             - 8000:8000
 
@@ -21,7 +22,4 @@ services:
             - MYSQL_PASSWORD=password
             - MYSQL_ROOT_PASSWORD=password
         volumes:
-            - db-data:/var/lib/mysql
-volumes:
-    db-data: ~
-    vendor: ~
+            - ./mysql:/var/lib/mysql
